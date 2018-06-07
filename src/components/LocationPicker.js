@@ -16,7 +16,7 @@ class LocationPicker extends React.Component {
     return (
       <div>
         <h2>Select a Departing Location</h2>
-          <Geosuggest onSuggestSelect={(e) => this.submitOrigin(e)}
+          <Geosuggest onSuggestSelect={(e) => (e !== undefined ? this.submitOrigin(e) : 'do nothing')}
                       country = "TZ">
             <div class="geosuggest">
               <div class="geosuggest__input-wrapper">
@@ -31,7 +31,7 @@ class LocationPicker extends React.Component {
             </div>
           </Geosuggest>
         <h2>Select a Destination</h2>
-          <Geosuggest onSuggestSelect={(e) => this.submitDestination(e)}
+          <Geosuggest onSuggestSelect={(e) => (e !== undefined ? this.submitDestination(e) : 'do nothing')}
                       country = "TZ">
             <div class="geosuggest">
               <div class="geosuggest__input-wrapper">
