@@ -2,9 +2,12 @@ import React from 'react';
 import Select, { Creatable } from 'react-select';
 import 'react-select/dist/react-select.css';
 
-import Timekeeper from 'react-timekeeper';
+
 import Checkbox from './Checkbox';
 import moment from 'moment';
+import Geosuggest from 'react-geosuggest';
+import LocationPicker from './LocationPicker';
+import TimePicker from './TimePicker';
 
 class SubmitReview extends React.Component {
   state = {
@@ -23,10 +26,7 @@ class SubmitReview extends React.Component {
       return (
         <div>
           <h1>Bus Ride Review</h1>
-          <h2>Select a Departing Location</h2>
-          {/*Try to get maps.me api for this*/}
-          <h2>Select a Destination</h2>
-          {/*Try to get maps.me api for this*/}
+            <LocationPicker />
           <h2>Choose a Bus Company</h2>
           {/*Gotta make user enter values persist/
             add them to some global list/
@@ -78,6 +78,7 @@ class SubmitReview extends React.Component {
               label={"Chickens"}
             />
           <h3>Additional Comments</h3>
+          {/*Include maps.me pins here if the location isn't obvious*/}
             <form >
               <label>
                 Essay:
@@ -85,18 +86,7 @@ class SubmitReview extends React.Component {
               </label>
               <input type="submit" value="Submit" />
             </form>
-          <h2>Pick the ticket departing time</h2>
-            <Timekeeper
-          		time={this.state.time}
-          	/>
-          <h2>Pick the actual departing time</h2>
-            <Timekeeper
-              time={this.state.time}
-            />
-          <h2>Pick the actual arrival time</h2>
-            <Timekeeper
-              time={this.state.time}
-            />
+          <TimePicker />
 
         </div>
       );
