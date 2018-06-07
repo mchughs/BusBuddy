@@ -2,95 +2,83 @@ import React from 'react';
 import Select, { Creatable } from 'react-select';
 import 'react-select/dist/react-select.css';
 
-
-import Checkbox from './Checkbox';
 import moment from 'moment';
-import Geosuggest from 'react-geosuggest';
+
+/*Components*/
 import LocationPicker from './LocationPicker';
 import TimePicker from './TimePicker';
+import FeatureCheckList from './FeatureCheckList';
+import Comments from './Comments';
+import BusBreakdown from './BusBreakdown';
+import TicketPrice from './TicketPrice';
 
 class SubmitReview extends React.Component {
-  state = {
+  constructor() {
+    super();
+
+    this.addPrice = this.addPrice.bind(this);
+    this.addComment = this.addComment.bind(this);
+    this.addPlace = this.addPlace.bind(this);
+
+    this.state = {
+      origin: '',
+      destination: '',
+      price: 0,
       selectedOption: '',
-    }
-    handleChange = (selectedOption) => {
+      comment: '',
+    };
+  }
+
+  addPrice(price) {
+    this.setState({price});
+  }
+
+  addComment(comment) {
+    this.setState({comment});
+  }
+
+  addPlace(place, isDestination) {
+    isDestination ?
+    this.setState({ destination : place }) :
+    this.setState({ origin      : place });
+  }
+
+  handleChange = (selectedOption) => {
       this.setState({ selectedOption });
   		// selectedOption can be null when the `x` (close) button is clicked
   		if (selectedOption) {
       	console.log(`Selected: ${selectedOption.label}`);
   		}
     }
-    render() {
-    	const { selectedOption } = this.state;
 
-      return (
-        <div>
-          <h1>Bus Ride Review</h1>
-            <LocationPicker />
-          <h2>Choose a Bus Company</h2>
-          {/*Gotta make user enter values persist/
-            add them to some global list/
-            sanitize them*/}
-            <Creatable
-              name="form-field-name"
-              value={selectedOption}
-              onChange={this.handleChange}
-              options={[
-                { value: 'Upendo', label: 'Upendo' },
-                { value: 'Abood', label: 'Abood' },
-              ]}
-            />
-          <h2>Cost of Ticket</h2>
-            <form>
-              <label>
-                <input type="text" name="price" />
-              </label>
-              <input type="submit" value="Submit" />
-            </form>
-          <h3>Did your bus break down?</h3>
-          {/*Will need to open up additional questions if Yes
-              Needs to save state somehow*/}
-            <form>
-              <div className="radio">
-                <label>
-                  <input type="radio" value="option1" />
-                  Yes
-                </label>
-              </div>
-              <div className="radio">
-                <label>
-                  <input type="radio" value="option2" />
-                  No
-                </label>
-              </div>
-            </form>
-          <h3>What was on your bus?</h3>
-            <Checkbox
-              label={"AC"}
-            />
-            <Checkbox
-              label={"Music Videos"}
-            />
-            <Checkbox
-              label={"Movies"}
-            />
-            <Checkbox
-              label={"Chickens"}
-            />
-          <h3>Additional Comments</h3>
-          {/*Include maps.me pins here if the location isn't obvious*/}
-            <form >
-              <label>
-                Essay:
-                <textarea />
-              </label>
-              <input type="submit" value="Submit" />
-            </form>
-          <TimePicker />
+  render() {
+  	const { selectedOption } = this.state;
 
-        </div>
-      );
-    }
+    return (
+      <div>
+        <h1>Bus Ride Review</h1>
+        <LocationPicker addPlace={this.addPlace}/>
+        <h2>Choose a Bus Company</h2>
+        {/*Gotta make user enter values persist/
+          add them to some global list/
+          sanitize them*/}
+          <Creatable
+            name="form-field-name"
+            value={selectedOption}
+            onChange={this.handleChange}
+            options={[
+              { value: 'Upendo', label: 'Upendo' },
+              { value: 'Abood', label: 'Abood' },
+            ]}
+          />
+        <TicketPrice addPrice={this.addPrice}/>
+        <BusBreakdown />
+        <FeatureCheckList />
+        <TimePicker />
+        <Comments addComment={this.addComment}/>
+      </div>
+    );
   }
+}
 
 export default SubmitReview;
