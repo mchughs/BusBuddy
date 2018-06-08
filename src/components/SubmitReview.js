@@ -7,11 +7,13 @@ import FeatureCheckList from './FeatureCheckList';
 import Comments from './Comments';
 import TicketPrice from './TicketPrice';
 import CompanyPicker from './CompanyPicker';
+import ReviewTicket from './ReviewTicket';
 
 class SubmitReview extends React.Component {
   constructor() {
     super();
 
+    this.showTicketReview = this.showTicketReview.bind(this);
     this.addPrice = this.addPrice.bind(this);
     this.addComment = this.addComment.bind(this);
     this.addPlace = this.addPlace.bind(this);
@@ -24,7 +26,6 @@ class SubmitReview extends React.Component {
       destination: '',
       company: '',
       price: 0,
-      selectedOption: '',
       comment: '',
       features: {
         isAC: false,
@@ -37,7 +38,12 @@ class SubmitReview extends React.Component {
       ticket_time: {hours: 12, minutes: 0, AM: false},
       departure_time: {hours: 12, minutes: 0, AM: false},
       arrival_time: {hours: 12, minutes: 0, AM: false},
+      reviewComplete: false,
     };
+  }
+
+  showTicketReview() {
+    this.setState({reviewComplete: true });
   }
 
   addPrice(price) {
@@ -93,9 +99,7 @@ class SubmitReview extends React.Component {
   }
 
   render() {
-  	const { selectedOption } = this.state;
-
-    return (
+    const mainPage = (
       <div>
         <h1>Bus Ride Review</h1>
           <LocationPicker addPlace={this.addPlace}/>
@@ -104,9 +108,18 @@ class SubmitReview extends React.Component {
           <FeatureCheckList addFeatures={this.addFeatures}/>
           <TimePicker addTime={this.addTime}/>
           <Comments addComment={this.addComment}/>
-          <input type="submit" value="Submit Review"/>
+          {/*Include a button to move the data to ReviewTicket*/}
+          <div>
+            <button type="submit" onClick={this.showTicketReview}>Submit</button>
+          </div>
       </div>
     );
+
+    const ticketPage = (
+      <ReviewTicket params={this.state}/>
+    )
+
+    return (<div>{this.state.reviewComplete ? ticketPage : mainPage }</div>);
   }
 }
 

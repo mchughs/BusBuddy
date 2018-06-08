@@ -22,10 +22,9 @@ class CompanyPicker extends React.Component {
           onChange={this.handleChange}
           placeholder="Enter a bus company"
           options={[
-            { value: 'one', label: 'Abood' },
-            { value: 'two', label: 'Upendo' },
-            { value: 'two', label: 'Private Noah' },
-            { value: 'two', label: '' },
+            { value: 'Abood', label: 'Abood' },
+            { value: 'Upendo', label: 'Upendo' },
+            { value: 'Private Noah', label: 'Private Noah' },
           ]}
         />
     </div>
