@@ -4,16 +4,16 @@ import Timekeeper from 'react-timekeeper';
 class TimePicker extends React.Component {
   submitTime(event, selector) {
     switch(selector) {
-      case 0:
-        this.props.addTime(this.time0.state, 0);
+      case 'ticket_time':
+        this.props.addTime(this.ticket_time.state, selector);
         break;
-      case 1:
-        this.props.addTime(this.time1.state, 1);
+      case 'departure_time':
+        this.props.addTime(this.departure_time.state, selector);
         break;
-      case 2:
-        this.props.addTime(this.time2.state, 2);
+      case 'arrival_time':  
+        this.props.addTime(this.arrival_time.state, selector);
         break;
-    }
+      }
   }
 
   render() {
@@ -21,18 +21,18 @@ class TimePicker extends React.Component {
       <div>
         <h2>Pick the ticket departing time</h2>
           <Timekeeper switchToMinuteOnHourSelect closeOnMinuteSelect
-            onChange={(e) => this.submitTime(e, 0)}
-            ref={(input) => this.time0 = input}
+            onChange={(e) => this.submitTime(e, 'ticket_time')}
+            ref={(input) => this.ticket_time = input}
           />
         <h2>Pick the actual departing time</h2>
           <Timekeeper switchToMinuteOnHourSelect closeOnMinuteSelect
-            onChange={(e) => this.submitTime(e, 1)}
-            ref={(input) => this.time1 = input}
+            onChange={(e) => this.submitTime(e, 'departure_time')}
+            ref={(input) => this.departure_time = input}
           />
         <h2>Pick the actual arrival time</h2>
           <Timekeeper switchToMinuteOnHourSelect closeOnMinuteSelect
-            onChange={(e) => this.submitTime(e, 2)}
-            ref={(input) => this.time2 = input}
+            onChange={(e) => this.submitTime(e, 'arrival_time')}
+            ref={(input) => this.arrival_time = input}
           />
       </div>
     );

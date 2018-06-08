@@ -23,7 +23,7 @@ class LocationPicker extends React.Component {
                 <input type="text"
                        class="geosuggest__input"
                        autocomplete="off"
-                       placeholder="Search places"
+                       placeholder="Select Village/Town/City"
                        value=""
                        ref={(input) => this.origin = input}
                 />
@@ -38,7 +38,7 @@ class LocationPicker extends React.Component {
                 <input type="text"
                        class="geosuggest__input"
                        autocomplete="off"
-                       placeholder="Search places"
+                       placeholder="Select Village/Town/City"
                        value=""
                        ref={(input) => this.destination = input}
                 />

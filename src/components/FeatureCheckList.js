@@ -2,13 +2,14 @@ import React from 'react';
 
 class FeatureCheckList extends React.Component {
   submitFeatures(event) {
-    event.preventDefault();
     console.log(this);
     const feats = {
       isAC : this.isAC.checked,
       isMusicVideos : this.isMusicVideos.checked,
       isMovies : this.isMovies.checked,
       isCurtains : this.isCurtains.checked,
+      isUSB : this.isUSB.checked,
+      brokedown: this.brokedown.checked,
     }
     this.props.addFeatures(feats);
   }
@@ -16,9 +17,8 @@ class FeatureCheckList extends React.Component {
   render() {
     return (
       <div>
-        {/*Maybe have just 2 ratings for hot/cold and loud/quiet.Problem with subjectivity*/}
         <h3>What was on your bus?</h3>
-          <form onSubmit={(e) => this.submitFeatures(e)}>
+          <form onChange={(e) => this.submitFeatures(e)}>
             <input ref={(input) => this.isAC = input}
                   type="checkbox"
                   id="AC"
@@ -30,13 +30,19 @@ class FeatureCheckList extends React.Component {
             <input ref={(input) => this.isMovies = input}
                   type="checkbox"
                   id="Mov"
-
             /> <label for="Mov">Movies</label>
             <input ref={(input) => this.isCurtains = input}
                   type="checkbox"
                   id="Cr"
             /> <label for="Cr">Curtains</label>
-            <button type= "submit">Submit features</button>
+          <input ref={(input) => this.isUSB = input}
+                  type="checkbox"
+                  id="USB"
+            /> <label for="USB">USB Charging</label>
+          <input ref={(input) => this.brokedown = input}
+                  type="checkbox"
+                  id="brokedown"
+            /> <label for="brokedown">Bus Brokedown</label>
           </form>
       </div>
     );

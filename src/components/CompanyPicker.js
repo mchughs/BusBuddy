@@ -1,5 +1,5 @@
 import React from 'react';
-import Select, { Creatable } from 'react-select';
+import { Creatable } from 'react-select';
 import 'react-select/dist/react-select.css';
 
 class CompanyPicker extends React.Component {
@@ -14,15 +14,21 @@ class CompanyPicker extends React.Component {
   	const { selectedOption } = this.state;
 
     return (
-      <Creatable
-        name="form-field-name"
-        value={selectedOption}
-        onChange={this.handleChange}
-        options={[
-          { value: 'one', label: 'One' },
-          { value: 'two', label: 'Two' },
-        ]}
-      />
+      <div>
+        <h2>Bus Company</h2>
+        <Creatable
+          name="form-field-name"
+          value={selectedOption}
+          onChange={this.handleChange}
+          placeholder="Enter a bus company"
+          options={[
+            { value: 'one', label: 'Abood' },
+            { value: 'two', label: 'Upendo' },
+            { value: 'two', label: 'Private Noah' },
+            { value: 'two', label: '' },
+          ]}
+        />
+    </div>
     );
   }
 }

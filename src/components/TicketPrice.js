@@ -11,11 +11,12 @@ class TicketPrice extends React.Component {
     return (
       <div>
         <h2>Cost of Ticket</h2>
-          <form onSubmit={(e) => this.submitPrice(e)}>
+          <form onChange={(e) => this.submitPrice(e)}>
             <label>
               {/*Maybe add form attribute to input instead and have the form appear further down the page*/}
               <input ref={(input) => this.price = input}
                      type="number"
+                     step="1000"
                      placeholder="Ticket Price"
               />
             </label>

@@ -5,7 +5,6 @@ import LocationPicker from './LocationPicker';
 import TimePicker from './TimePicker';
 import FeatureCheckList from './FeatureCheckList';
 import Comments from './Comments';
-import BusBreakdown from './BusBreakdown';
 import TicketPrice from './TicketPrice';
 import CompanyPicker from './CompanyPicker';
 
@@ -32,10 +31,12 @@ class SubmitReview extends React.Component {
         isMusicVideos: false,
         isMovies: false,
         hasCurtains: false,
+        hasUSB: false,
+        brokedown: false,
       },
-      ticket_time: {hours: 0, minutes: 0, AM: true},
-      departure_time: {hours: 0, minutes: 0, AM: true},
-      arrival_time: {hours: 0, minutes: 0, AM: true},
+      ticket_time: {hours: 12, minutes: 0, AM: false},
+      departure_time: {hours: 12, minutes: 0, AM: false},
+      arrival_time: {hours: 12, minutes: 0, AM: false},
     };
   }
 
@@ -64,26 +65,29 @@ class SubmitReview extends React.Component {
   addTime(time, selector) {
     let stateTime;
     switch(selector) {
-      case 0:
+      case 'ticket_time':
         stateTime = {...this.state.ticket_time};
         stateTime.hours = time.hour;
         stateTime.minutes = time.minute;
         stateTime.AM = (time.meridiem === "am" ? true : false);
         this.setState({ticket_time: stateTime});
         break;
-      case 1:
+      case 'departure_time':
         stateTime = {...this.state.departure_time};
         stateTime.hours = time.hour;
         stateTime.minutes = time.minute;
         stateTime.AM = (time.meridiem === "am" ? true : false);
         this.setState({departure_time: stateTime});
         break;
-      case 2:
+      case 'arrival_time':
         stateTime = {...this.state.arrival_time};
         stateTime.hours = time.hour;
         stateTime.minutes = time.minute;
         stateTime.AM = (time.meridiem === "am" ? true : false);
         this.setState({arrival_time: stateTime});
+        break;
+      default:
+        throw "The clock you selected isn't hooked up right";
         break;
     }
   }
@@ -94,13 +98,13 @@ class SubmitReview extends React.Component {
     return (
       <div>
         <h1>Bus Ride Review</h1>
-        <LocationPicker addPlace={this.addPlace}/>
-        <CompanyPicker addCompany={this.addCompany}/>
-        <TicketPrice addPrice={this.addPrice}/>
-        <BusBreakdown />
-        <FeatureCheckList addFeatures={this.addFeatures}/>
-        <TimePicker addTime={this.addTime}/>
-        <Comments addComment={this.addComment}/>
+          <LocationPicker addPlace={this.addPlace}/>
+          <CompanyPicker addCompany={this.addCompany}/>
+          <TicketPrice addPrice={this.addPrice}/>
+          <FeatureCheckList addFeatures={this.addFeatures}/>
+          <TimePicker addTime={this.addTime}/>
+          <Comments addComment={this.addComment}/>
+          <input type="submit" value="Submit Review"/>
       </div>
     );
   }
