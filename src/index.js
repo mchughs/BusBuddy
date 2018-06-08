@@ -5,6 +5,7 @@ import './index.css';
 
 import MainPage from './components/MainPage';
 import SubmitReview from './components/SubmitReview';
+import BrowseReviews from './components/BrowseReviews';
 
 const Root = () => {
   return (
@@ -12,6 +13,7 @@ const Root = () => {
       <Switch>
         <Route exact path='/' component={MainPage}/>
         <Route exact path='/submit-review' component={SubmitReview}/>
+        <Route exact path='/browse-reviews' component={BrowseReviews}/>
       </Switch>
     </BrowserRouter>
   );

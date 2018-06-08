@@ -1,4 +1,5 @@
 import React from 'react';
+import base from '../base';
 
 /*Components*/
 import LocationPicker from './LocationPicker';
@@ -40,6 +41,18 @@ class SubmitReview extends React.Component {
       arrival_time: {hours: 12, minutes: 0, AM: false},
       reviewComplete: false,
     };
+  }
+
+  componentWillMount() {
+    this.ref = base.syncState(`/submit-review`
+      , {
+        context: this,
+        state: 'state',
+    });
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
   }
 
   showTicketReview() {

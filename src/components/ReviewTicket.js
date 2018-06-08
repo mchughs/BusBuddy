@@ -10,9 +10,7 @@ class ReviewTicket extends React.Component {
   }
 
   render() {
-    console.log({...this.props.params}.price)
-
-    return (
+      return (
       <div>
         <div>Bus Company: {{...this.props.params}.company}</div>
         <ul>
@@ -25,7 +23,7 @@ class ReviewTicket extends React.Component {
         <div>Departed at: {this.timeFormatter({...this.props.params}.departure_time)}</div>
         <div>Arrived at: {this.timeFormatter({...this.props.params}.arrival_time)}</div>
         {/*Either make the features display in a table or as a series of boxes with X or 'checks'*/}
-
+        {/*Allow user a chance to alter a field they may have made a typo on*/}
       </div>
     );
   }
