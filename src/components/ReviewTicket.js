@@ -11,8 +11,8 @@ class ReviewTicket extends React.Component {
 
   render() {
       return (
-      <div>
-        <div>Bus Company: {{...this.props.params}.company}</div>
+      <div className="reviewTicket">
+        <div className="company">Bus Company: {{...this.props.params}.company}</div>
         <ul>
           <li>From: {{...this.props.params}.origin}</li>
           <li>To: {{...this.props.params}.destination}</li>
@@ -24,6 +24,8 @@ class ReviewTicket extends React.Component {
         <div>Arrived at: {this.timeFormatter({...this.props.params}.arrival_time)}</div>
         {/*Either make the features display in a table or as a series of boxes with X or 'checks'*/}
         {/*Allow user a chance to alter a field they may have made a typo on*/}
+        {/*Can add a button to trigger the SubmitReview state's reviewComplete parameter to toggle to false to return to the
+          submitreview page to make any corrections*/}
       </div>
     );
   }

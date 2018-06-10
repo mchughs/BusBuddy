@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './index.css';
+import './ticket.css';
 
 import MainPage from './components/MainPage';
 import SubmitReview from './components/SubmitReview';

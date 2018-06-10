@@ -22,6 +22,8 @@ class SubmitReview extends React.Component {
     this.addCompany = this.addCompany.bind(this);
     this.addTime = this.addTime.bind(this);
 
+    this.loadDefault = this.loadDefault.bind(this);
+
     this.state = {
       origin: '',
       destination: '',
@@ -41,6 +43,31 @@ class SubmitReview extends React.Component {
       arrival_time: {hours: 12, minutes: 0, AM: false},
       reviewComplete: false,
     };
+  }
+
+  loadDefault() {
+    this.setState({
+      origin: 'Iringa, Tanzania',
+      destination: 'Singida, Tanzania',
+      company: 'Abood',
+      price: 28000,
+      comment: 'Regular intercity bus services by steam-powered buses were \
+      pioneered in England in the 1830s by Walter Hancock and by associates of \
+      Sir Goldsworthy Gurney, among others, running reliable services over road \
+      conditions which were too hazardous for horse-drawn transportation.',
+      features: {
+        isAC: false,
+        isMusicVideos: true,
+        isMovies: true,
+        hasCurtains: false,
+        hasUSB: true,
+        brokedown: false,
+      },
+      ticket_time: {hours: 12, minutes: 30, AM: false},
+      departure_time: {hours: 12, minutes: 32, AM: false},
+      arrival_time: {hours: 5, minutes: 10, AM: false},
+      reviewComplete: true,
+    });
   }
 
   componentWillMount() {
@@ -121,7 +148,9 @@ class SubmitReview extends React.Component {
           <FeatureCheckList addFeatures={this.addFeatures}/>
           <TimePicker addTime={this.addTime}/>
           <Comments addComment={this.addComment}/>
-          {/*Include a button to move the data to ReviewTicket*/}
+          <div>
+            <button type="submit" onClick={this.loadDefault}>loadDefault</button>
+          </div>
           <div>
             <button type="submit" onClick={this.showTicketReview}>Submit</button>
           </div>

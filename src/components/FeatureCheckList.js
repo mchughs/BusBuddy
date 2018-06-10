@@ -2,7 +2,6 @@ import React from 'react';
 
 class FeatureCheckList extends React.Component {
   submitFeatures(event) {
-    console.log(this);
     const feats = {
       isAC : this.isAC.checked,
       isMusicVideos : this.isMusicVideos.checked,
