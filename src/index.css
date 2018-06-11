@@ -1,0 +1,31 @@
+
+.review {
+  border: 2px blue solid;
+  height: 400px;
+  display: grid;
+}
+
+.top {
+  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+}
+
+.location {
+  grid-column: 1 / span 2;
+}
+
+.time {
+  grid-column: 4 / span 1;
+}
+
+.start {
+  grid-row: 1 / 2;
+}
+
+.stop {
+  grid-row: 2 / 3;
+}
+
+.bottom {
+  grid-column: 1 / span 4;
+  grid-row: 5 / span 1;
+}
