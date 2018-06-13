@@ -1,31 +1,183 @@
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 400;
+  src: local('Roboto'), url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700') format('woff2');
+}
 
-.review {
-  border: 2px blue solid;
-  height: 400px;
+.reviews {
   display: grid;
+  grid-gap: 20px;
+  overflow: hidden;
 }
 
-.top {
-  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+.location_input {
+  display: inline-block;
+  width: 48%;
 }
 
-.location {
-  grid-column: 1 / span 2;
+.time_input {
+  text-align: center;
+  font-family: Arial;
 }
 
-.time {
-  grid-column: 4 / span 1;
+p {
+  border-radius: 20px;
+  font-family: Arial;
+  background: #286DA8;
+  color: white;
+  padding: 15px;
 }
 
-.start {
-  grid-row: 1 / 2;
+.review_head {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(min-content, max-content));
+  background-color: #286DA8;
+  grid-gap: 10px;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  font-size: 15px;
+  align-items: center;
+  grid-template-areas:
+    "origin         arrow1 destination"
+    "departure_time arrow2 arrival_and_total";
+  justify-self: center;
 }
 
-.stop {
-  grid-row: 2 / 3;
+.origin {
+  grid-area: origin;
 }
 
-.bottom {
-  grid-column: 1 / span 4;
-  grid-row: 5 / span 1;
+.destination {
+  grid-area: destination;
+}
+
+.arrow1 {
+  grid-area: arrow1;
+}
+
+.arrow2 {
+  grid-area: arrow2;
+}
+
+.departure_time {
+  grid-area: departure_time;
+  justify-self: end;
+}
+
+.arrival_and_total {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(min-content, max-content));
+  grid-area: arrival_and_total;
+  grid-column-gap: 20px;
+  grid-template-areas: "arrival_time total_time";
+}
+
+.arrival_time {
+  grid-area: arrival_time;
+}
+
+.total_time {
+  grid-area: total_time;
+  color: gold;
+}
+
+
+.review_head:hover .review{
+  display: block;
+}
+
+.review_tail {
+  border-radius: 2px;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.12),
+              0 2px 2px rgba(0,0,0,0.24);
+  background-color: #E9E9E9;
+  display: grid;
+  padding: 10px;
+}
+
+.detail_text {
+  font-size: 10px;
+  padding-bottom: 10px;
+}
+
+.detail_table {
+  text-align: center;
+}
+
+.thisbus {
+  font-size: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.features {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: max-content 30px 5px max-content 30px;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    "isAC isAC_bool . isMusicVideos isMusicVideos_bool"
+    "isMovies isMovies_bool . hasCurtains hasCurtains_bool"
+    "hasUSB hasUSB_bool . . .";
+}
+
+.category {
+  font-weight: light;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+div [value = false] {
+  color: red;
+}
+
+div [value = true] {
+  color: green;
+}
+
+.isAC {
+  grid-area: isAC;
+}
+
+.isMusicVideos {
+  grid-area: isMusicVideos;
+}
+
+.isMovies {
+  grid-area: isMovies;
+}
+
+.hasCurtains {
+  grid-area: hasCurtains;
+}
+
+.hasUSB {
+  grid-area: hasUSB;
+}
+
+.isAC_bool {
+  grid-area: isAC_bool;
+}
+
+.isMusicVideos_bool {
+  grid-area: isMusicVideos_bool;
+}
+
+.isMovies_bool {
+  grid-area: isMovies_bool;
+}
+
+.hasCurtains_bool {
+  grid-area: hasCurtains_bool;
+}
+
+.hasUSB_bool {
+  grid-area: hasUSB_bool;
+}
+
+.brokedown {
+  font-weight: bold;
+  padding-top: 20px;
+  text-align: center;
 }
