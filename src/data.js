@@ -92,7 +92,7 @@ const reviews = [
     },
     'ticket_time': {'hours': 12, 'minutes': 0, 'AM': false},
     'departure_time': {'hours': 12, 'minutes': 0, 'AM': false},
-    'arrival_time': {'hours': 12, 'minutes': 0, 'AM': false},
+    'arrival_time': {'hours': 1, 'minutes': 0, 'AM': false},
   },
   {
     'reviewId': '5',

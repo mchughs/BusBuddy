@@ -4,6 +4,31 @@
   src: local('Roboto'), url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700') format('woff2');
 }
 
+h1 {
+  text-align: center;
+}
+
+.link {
+  text-align: center;
+}
+
+.container {
+  text-align: center;
+}
+
+.clock-container {
+  display: grid;
+  justify-items: center;
+}
+
+textarea{
+  width: 300px;
+  height: 200px;
+  box-shadow: 0 4px 4px 4px 0px;
+  border-radius: 1px;
+  font-size: 15px;
+}
+
 .reviews {
   display: grid;
   grid-gap: 20px;
@@ -23,9 +48,13 @@
 p {
   border-radius: 20px;
   font-family: Arial;
-  background: #286DA8;
+  background: #6D7993;
   color: white;
   padding: 15px;
+}
+
+ul {
+  text-align: left;
 }
 
 .review_head {
@@ -122,9 +151,53 @@ p {
     "hasUSB hasUSB_bool . . .";
 }
 
+.finalize-button {
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+  width: 99%;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.finalize-button:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+input.largerCheckbox
+{
+	width: 20px;
+	height: 20px;
+}
+
+.feature-checklist {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 30px max-content;
+  grid-template-rows: repeat(6, 1fr);
+  justify-content: center;
+  align-items: center;
+}
+
 .category {
   font-weight: light;
   font-size: 10px;
+  text-transform: uppercase;
+}
+
+.company {
+  text-transform: uppercase;
+}
+
+.creatable {
   text-transform: uppercase;
 }
 
@@ -180,4 +253,71 @@ div [value = true] {
   font-weight: bold;
   padding-top: 20px;
   text-align: center;
+}
+
+
+
+.geosuggest {
+  font-size: 18px;
+  font-size: 1rem;
+  position: relative;
+  width: 50%;
+  margin: 1em auto;
+  text-align: left;
+}
+.geosuggest__input {
+  width: 100%;
+  border: 2px solid transparent;
+  box-shadow: 0 0 1px #3d464d;
+  padding: .5em 1em;
+  -webkit-transition: border 0.2s, box-shadow 0.2s;
+          transition: border 0.2s, box-shadow 0.2s;
+}
+.geosuggest__input:focus {
+  border-color: #267dc0;
+  box-shadow: 0 0 0 transparent;
+}
+.geosuggest__suggests {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 25em;
+  padding: 0;
+  margin-top: -1px;
+  background: #fff;
+  border: 2px solid #267dc0;
+  border-top-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  list-style: none;
+  z-index: 5;
+  -webkit-transition: max-height 0.2s, border 0.2s;
+          transition: max-height 0.2s, border 0.2s;
+}
+.geosuggest__suggests--hidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0;
+}
+.geosuggest__item {
+  font-size: 18px;
+  font-size: 1rem;
+  padding: .5em .65em;
+  cursor: pointer;
+}
+.geosuggest__item:hover,
+.geosuggest__item:focus {
+  background: #f5f5f5;
+}
+.geosuggest__item--active {
+  background: #267dc0;
+  color: #fff;
+}
+.geosuggest__item--active:hover,
+.geosuggest__item--active:focus {
+  background: #ccc;
+}
+.geosuggest__item__matched-text {
+  font-weight: bold;
 }

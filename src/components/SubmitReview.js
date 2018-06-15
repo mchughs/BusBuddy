@@ -1,5 +1,5 @@
 import React from 'react';
-import base from '../base';
+import { Redirect } from 'react-router-dom';
 
 /*Components*/
 import LocationPicker from './LocationPicker';
@@ -8,13 +8,13 @@ import FeatureCheckList from './FeatureCheckList';
 import Comments from './Comments';
 import TicketPrice from './TicketPrice';
 import CompanyPicker from './CompanyPicker';
-import ReviewTicket from './ReviewTicket';
+import Review from './Review';
 
 class SubmitReview extends React.Component {
   constructor() {
     super();
 
-    this.showTicketReview = this.showTicketReview.bind(this);
+    this.finalize = this.finalize.bind(this);
     this.addPrice = this.addPrice.bind(this);
     this.addComment = this.addComment.bind(this);
     this.addPlace = this.addPlace.bind(this);
@@ -41,7 +41,8 @@ class SubmitReview extends React.Component {
       ticket_time: {hours: 12, minutes: 0, AM: false},
       departure_time: {hours: 12, minutes: 0, AM: false},
       arrival_time: {hours: 12, minutes: 0, AM: false},
-      reviewComplete: false,
+      reviewId: 0,
+      referrer: null,
     };
   }
 
@@ -66,9 +67,19 @@ class SubmitReview extends React.Component {
       ticket_time: {hours: 12, minutes: 30, AM: false},
       departure_time: {hours: 12, minutes: 32, AM: false},
       arrival_time: {hours: 5, minutes: 10, AM: false},
-      reviewComplete: true,
+      reviewId: 0,
     });
   }
+
+  finalize(e) {
+    /*Time stamp the review*/
+    const reviewId = Date.now()
+    this.setState({ reviewId });
+    /*Send all the data in the state over to be included in the array of reviews*/
+    this.props.addReview(this.state);
+    this.setState({referrer: '/'});
+  }
+
 
   /*componentWillMount() {
     this.ref = base.syncState(`/submit-review`
@@ -81,10 +92,6 @@ class SubmitReview extends React.Component {
   componentWillUnmount() {
     base.removeBinding(this.ref);
   }*/
-
-  showTicketReview() {
-    this.setState({reviewComplete: true });
-  }
 
   addPrice(price) {
     this.setState({price});
@@ -139,8 +146,8 @@ class SubmitReview extends React.Component {
   }
 
   render() {
-    const mainPage = (
-      <div>
+    const inputPage = (
+      <div className="container">
         <h1>Bus Ride Review</h1>
           <LocationPicker addPlace={this.addPlace}/>
           <CompanyPicker addCompany={this.addCompany}/>
@@ -148,20 +155,28 @@ class SubmitReview extends React.Component {
           <FeatureCheckList addFeatures={this.addFeatures}/>
           <TimePicker addTime={this.addTime}/>
           <Comments addComment={this.addComment}/>
-          <div>
-            <button type="submit" onClick={this.loadDefault}>loadDefault</button>
-          </div>
-          <div>
-            <button type="submit" onClick={this.showTicketReview}>Submit</button>
-          </div>
       </div>
     );
 
-    const ticketPage = (
-      <Review review={this.state}/>
+    const reviewPage = (
+      <div className="reviews">
+        <h2>Please check that all fields have been set correctly.</h2>
+        <Review review={this.state}/>
+        <br/>
+          <div>
+            <button className="finalize-button" type="submit" onClick={(e) => this.loadDefault(e)}>loadDefault</button>
+          </div>
+        <br/>
+        <div>
+          <button className="finalize-button" type="submit" onClick={(e) => this.finalize(e)}>finalize</button>
+        </div>
+      </div>
     )
 
-    return (<div>{this.state.reviewComplete ? ticketPage : mainPage }</div>);
+    return (
+      this.state.referrer ?
+      <Redirect to={this.state.referrer}/> :
+      <div>{ inputPage }{ reviewPage }</div>) ;
   }
 }
 

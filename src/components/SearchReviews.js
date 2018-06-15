@@ -17,8 +17,12 @@ class SearchReviews extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.props.fetchReviews();
+  }
+
   search() {
-    const { reviews } = this.props;
+    const reviews = Object.values(this.props.reviews);
     const filtered = reviews
       .filter(review =>
         review.origin.toUpperCase().indexOf(this.state.origin.toUpperCase()) == 0 &&
@@ -27,7 +31,7 @@ class SearchReviews extends React.Component {
         this.checkTime(review))
       .map((review, i) => <Review key={i} i={i} review={review} />)
     // Returns a message if no reviews match
-    return filtered.length ? filtered : <div>No matches found.</div> ;
+    return filtered.length ? filtered : <div>No matches found.</div>
   }
 
   checkTime(review) {
@@ -41,13 +45,11 @@ class SearchReviews extends React.Component {
     const c = this.state.after.hours != 12 ?
       (this.state.after.AM ? this.state.after.hours : this.state.after.hours+12) :
       this.state.after.hours;
-    console.log(a,b,c);
     const ticket_time = a*60 + review.ticket_time.minutes;
     const before = b*60 + this.state.before.minutes;
     const after = c*60 + this.state.after.minutes;
     const m = before - ticket_time;
     const n = ticket_time - after;
-    console.log(ticket_time, before, after);
     return (m >= 0 && n >= 0);
   }
 
@@ -93,7 +95,7 @@ class SearchReviews extends React.Component {
               <Timekeeper className="clock" switchToMinuteOnHourSelect closeOnMinuteSelect
                           ref={(input) => this.before = input}
                           onChange={(e) => this.handleTime(e, 'before')}
-                          time={"11:59pm"}
+
               />
           </details>
           <details className="time_input">
@@ -101,7 +103,7 @@ class SearchReviews extends React.Component {
               <Timekeeper className="clock" switchToMinuteOnHourSelect closeOnMinuteSelect
                           ref={(input) => this.after = input}
                           onChange={(e) => this.handleTime(e, 'after')}
-                          time={"00:00"}
+
               />
           </details>
 

@@ -8,7 +8,11 @@ class Main extends React.Component {
         <h1>
           Bus Buddy
         </h1>
-        <Link to={`/search`}>Search Reviews</Link>
+        <div className="link">
+          <Link className="link" to={`/search`}>Search Reviews</Link>
+          <br/>
+          <Link className="link" to={`/write`}>Write Review</Link>
+        </div>
       </div>
     )
   }

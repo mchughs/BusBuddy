@@ -11,18 +11,17 @@ class Review extends React.Component {
 
   elapsedTime(t1 , t2) {
     // Convert to 24h
-    const a = t1.AM ? t1.hours : t1.hours+12;
-    const b = t2.AM ? t2.hours : t2.hours+12;
+    const a = t1.hours != 12 ?
+      (t1.AM ? t1.hours : t1.hours+12) :
+      t1.hours;
+    const b = t2.hours != 12 ?
+      (t2.AM ? t2.hours : t2.hours+12) :
+      t2.hours;
     // Convert to minutes
     const t1_new = a*60 + t1.minutes;
     const t2_new = b*60 + t2.minutes;
     const t = t2_new - t1_new;
     return (` (${Math.floor(t / 60)}h ${t % 60}m)`);
-  }
-
-  expandContent(e) {
-    e.preventDefault();
-    console.log('oh boy');
   }
 
   displayFeatures(features) {
