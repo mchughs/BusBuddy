@@ -10,12 +10,14 @@ import './index.css';
 import { SearchApp, SubmitApp} from './components/App';
 import Main from './components/Main';
 import Review from './components/Review';
+import Login from './components/Login';
 
 const router = (
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Main}></Route>
+          <Route path="/login" component={Login}></Route>
           <Route path="/search" component={SearchApp}></Route>
           <Route path="/write" component={SubmitApp}></Route>
           <Route path="/view/:reviewId" component={Review}></Route>

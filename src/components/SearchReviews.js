@@ -86,6 +86,9 @@ class SearchReviews extends React.Component {
   render() {
     return (
       <div>
+        <h1>
+          Bus Buddy
+        </h1>
         <form onChange={this.handleChange}>
           <input className="location_input" type="text" ref="origin" placeholder="Leaving from?"/>
           <input className="location_input" type="text" ref="destination" placeholder="Going to?"/>

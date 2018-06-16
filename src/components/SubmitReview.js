@@ -22,8 +22,6 @@ class SubmitReview extends React.Component {
     this.addCompany = this.addCompany.bind(this);
     this.addTime = this.addTime.bind(this);
 
-    this.loadDefault = this.loadDefault.bind(this);
-
     this.state = {
       origin: '',
       destination: '',
@@ -46,31 +44,6 @@ class SubmitReview extends React.Component {
     };
   }
 
-  loadDefault() {
-    this.setState({
-      origin: 'Iringa, Tanzania',
-      destination: 'Singida, Tanzania',
-      company: 'Abood',
-      price: 28000,
-      comment: 'Regular intercity bus services by steam-powered buses were \
-      pioneered in England in the 1830s by Walter Hancock and by associates of \
-      Sir Goldsworthy Gurney, among others, running reliable services over road \
-      conditions which were too hazardous for horse-drawn transportation.',
-      features: {
-        isAC: false,
-        isMusicVideos: true,
-        isMovies: true,
-        hasCurtains: false,
-        hasUSB: true,
-        brokedown: false,
-      },
-      ticket_time: {hours: 12, minutes: 30, AM: false},
-      departure_time: {hours: 12, minutes: 32, AM: false},
-      arrival_time: {hours: 5, minutes: 10, AM: false},
-      reviewId: 0,
-    });
-  }
-
   finalize(e) {
     /*Time stamp the review*/
     const reviewId = Date.now()
@@ -79,19 +52,6 @@ class SubmitReview extends React.Component {
     this.props.addReview(this.state);
     this.setState({referrer: '/'});
   }
-
-
-  /*componentWillMount() {
-    this.ref = base.syncState(`/submit-review`
-      , {
-        context: this,
-        state: 'state',
-    });
-  }
-
-  componentWillUnmount() {
-    base.removeBinding(this.ref);
-  }*/
 
   addPrice(price) {
     this.setState({price});
@@ -163,12 +123,8 @@ class SubmitReview extends React.Component {
         <h2>Please check that all fields have been set correctly.</h2>
         <Review review={this.state}/>
         <br/>
-          <div>
-            <button className="finalize-button" type="submit" onClick={(e) => this.loadDefault(e)}>loadDefault</button>
-          </div>
-        <br/>
         <div>
-          <button className="finalize-button" type="submit" onClick={(e) => this.finalize(e)}>finalize</button>
+          <button className="finalize-button" type="submit" onClick={(e) => this.finalize(e)}>Finalize</button>
         </div>
       </div>
     )
