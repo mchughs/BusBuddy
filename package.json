@@ -2,7 +2,7 @@
   "name": "busbuddy",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mchughs.github.io/BusBuddy/",
+  "homepage": "https://mchughs.github.io/BusBuddySite/",
   "dependencies": {
     "firebase": "^5.0.4",
     "jquery": "^3.3.1",
