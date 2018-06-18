@@ -13,6 +13,8 @@ class TimePicker extends React.Component {
       case 'arrival_time':
         this.props.addTime(this.arrival_time.state, selector);
         break;
+      default:
+        console.log('TimePicker Error');
       }
   }
 

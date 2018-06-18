@@ -1,6 +1,5 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import firebase from 'firebase';
 
 /*Components*/
 import LocationPicker from './LocationPicker';
@@ -23,15 +22,6 @@ class SubmitReview extends React.Component {
     this.addCompany = this.addCompany.bind(this);
     this.addTime = this.addTime.bind(this);
 
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        const uid = user.uid;
-        this.setState({uid});
-      } else {
-        /* If the user isn't logged in yet we should redirect them to Main.js*/
-      }
-    });
-
     this.state = {
       origin: '',
       destination: '',
@@ -53,6 +43,16 @@ class SubmitReview extends React.Component {
       referrer: null,
       uid: null,
     };
+  }
+
+  componentWillMount() {
+    const localStorageRef = localStorage.getItem('user');
+    if(localStorageRef) {
+      this.setState({uid : JSON.parse(localStorageRef).user.uid })
+    } else {
+      window.alert('Please log in first!');
+      window.location.href = "/";
+    }
   }
 
   finalize(e) {
@@ -121,7 +121,10 @@ class SubmitReview extends React.Component {
       <div className="container">
         <h1>Bus Ride Review</h1>
           <LocationPicker addPlace={this.addPlace}/>
-          <CompanyPicker addCompany={this.addCompany}/>
+          <CompanyPicker addCompany={this.addCompany}
+                         addToDataBase={this.props.addCompany}
+                         fetchCompanies={this.props.fetchCompanies}
+                         companies={this.props.companies}/>
           <TicketPrice addPrice={this.addPrice}/>
           <FeatureCheckList addFeatures={this.addFeatures}/>
           <TimePicker addTime={this.addTime}/>

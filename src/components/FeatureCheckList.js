@@ -16,43 +16,43 @@ class FeatureCheckList extends React.Component {
   render() {
     return (
       <div >
-        <h3>What was on your bus?</h3>
+        <h3>What were the bus features ?</h3>
           <form className="feature-checklist" onChange={(e) => this.submitFeatures(e)}>
             <input ref={(input) => this.isAC = input}
                   className="largerCheckbox"
                   type="checkbox"
                   id="AC"
-            /> <label for="AC">AC</label>
+            /> <label htmlFor="AC">AC</label>
 
             <input ref={(input) => this.isMusicVideos = input}
                   className="largerCheckbox"
                   type="checkbox"
                   id="MV"
-            /> <label for="MV">MusicVideos</label>
+            /> <label htmlFor="MV">MusicVideos</label>
 
             <input ref={(input) => this.isMovies = input}
                   className="largerCheckbox"
                   type="checkbox"
                   id="Mov"
-            /> <label for="Mov">Movies</label>
+            /> <label htmlFor="Mov">Movies</label>
 
             <input ref={(input) => this.isCurtains = input}
                   className="largerCheckbox"
                   type="checkbox"
                   id="Cr"
-            /> <label for="Cr">Curtains</label>
+            /> <label htmlFor="Cr">Curtains</label>
 
             <input ref={(input) => this.isUSB = input}
                   className="largerCheckbox"
                   type="checkbox"
                   id="USB"
-            /> <label for="USB">USB Charging</label>
+            /> <label htmlFor="USB">USB Charging</label>
 
             <input ref={(input) => this.brokedown = input}
                   className="largerCheckbox"
                   type="checkbox"
                   id="brokedown"
-            /> <label for="brokedown">Bus Brokedown</label>
+            /> <label htmlFor="brokedown">Bus Brokedown</label>
           </form>
       </div>
     );

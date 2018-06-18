@@ -15,8 +15,14 @@ class Login extends React.Component {
     const auth = firebase.auth();
 
     const promise = auth.signInWithEmailAndPassword(email, password);
-    promise.catch(e => window.alert(e.message));
-    promise.then(e => e, e => e);
+    promise.then(
+      e => {
+        localStorage.setItem('user', JSON.stringify(e));
+        this.props.logInUser();
+      })
+    promise.catch(
+      e => window.alert(e.message)
+    );
   }
 
   handleSignup(e) {
@@ -25,11 +31,9 @@ class Login extends React.Component {
     const password = this.password.value;
     const auth = firebase.auth();
 
-    const promise1 = auth.createUserWithEmailAndPassword(email, password);
-    promise1.catch(e => window.alert(e.message));
-    // log the user in
-    const promise2 = auth.signInWithEmailAndPassword(email, password);
-    promise2.then(e => e, e => e);
+    const promise = auth.createUserWithEmailAndPassword(email, password);
+    promise.then(e => window.alert('Thanks for signing up! Please click the Log in button!'))
+    promise.catch(e => window.alert(e.message));
   }
 
   render() {
@@ -39,11 +43,11 @@ class Login extends React.Component {
           Bus Buddy
         </h1>
         <div >
-          <label for="login_field">
+          <label htmlFor="login_field">
             Email
           </label>
           <input className="email-password" id="email" ref={(input) => { this.email = input }} type="text"/>
-          <label for="password">
+          <label htmlFor="password">
             Password
           </label>
 

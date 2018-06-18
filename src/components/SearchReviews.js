@@ -8,17 +8,10 @@ class SearchReviews extends React.Component {
     super(props);
 
     this.props.fetchReviews();
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        const uid = user.uid;
-        this.setState({uid});
-      } else {
-        /* If the user isn't logged in yet we should redirect them to Main.js*/
-      }
-    });
 
     this.handleChange = this.handleChange.bind(this);
     this.search = this.search.bind(this);
+    this.deleteReview = this.deleteReview.bind(this);
 
     this.state = {
       origin : '',
@@ -29,24 +22,42 @@ class SearchReviews extends React.Component {
     }
   }
 
+  componentWillMount() {
+    const localStorageRef = localStorage.getItem('user');
+    if (localStorageRef) {
+      const userObject = JSON.parse(localStorageRef);
+      return this.setState({uid : userObject.user.uid})
+    } else {
+      console.log('Local Storage empty');
+      window.alert('You are not logged in so you will not be able to delete reviews which you have created.');
+    }
+  }
+
   search() {
-    const reviews = Object.values(this.props.reviews);
+    const reviews = Object.values(this.props.reviews).reverse();
     const filtered = reviews
+      // Filter by the Origin and Destination
       .filter(review =>
-        review.origin.toUpperCase().indexOf(this.state.origin.toUpperCase()) == 0 &&
-        review.destination.toUpperCase().indexOf(this.state.destination.toUpperCase()) == 0)
+        review.origin.toUpperCase().indexOf(this.state.origin.toUpperCase()) === 0 &&
+        review.destination.toUpperCase().indexOf(this.state.destination.toUpperCase()) === 0)
+      // Filter by the time frame
       .filter(review =>
         this.checkTime(review))
       .map((review, i) =>
-        <div className="review-delete">
+        <div key={i} className="review-delete">
           <Review key={i} i={i} review={review} />
           {this.checkUser(review) ?
             /*Need to get corresponding key of the given review*/
-            <button className="deletebtn" onClick={() => this.props.removeReview(this.getKey(review))}>X</button> :
+            <button className="deletebtn" onClick={() => this.deleteReview(review)}>X</button> :
             <br/>}
         </div>)
     // Returns a message if no reviews match
     return filtered.length ? filtered : <div>No matches found.</div>
+  }
+
+  deleteReview(review) {
+    const a = window.confirm("Are you sure you want to delete this review?");
+    if(a) {this.props.removeReview(this.getKey(review));}
   }
 
   getKey(review) {
@@ -57,13 +68,13 @@ class SearchReviews extends React.Component {
 
   checkTime(review) {
     {/*annoying fact that 12pm is actually 12:00 not 24:00 or 00:00*/}
-    const a = review.ticket_time.hours != 12 ?
+    const a = review.ticket_time.hours !== 12 ?
       (review.ticket_time.AM ? review.ticket_time.hours : review.ticket_time.hours+12) :
       review.ticket_time.hours;
-    const b = this.state.before.hours != 12 ?
+    const b = this.state.before.hours !== 12 ?
       (this.state.before.AM ? this.state.before.hours : this.state.before.hours+12) :
       this.state.before.hours;
-    const c = this.state.after.hours != 12 ?
+    const c = this.state.after.hours !== 12 ?
       (this.state.after.AM ? this.state.after.hours : this.state.after.hours+12) :
       this.state.after.hours;
     const ticket_time = a*60 + review.ticket_time.minutes;
@@ -105,7 +116,6 @@ class SearchReviews extends React.Component {
       default:
         console.log(Error);
       }
-    console.log(this.state.before, this.state.after);
   }
 
   render() {

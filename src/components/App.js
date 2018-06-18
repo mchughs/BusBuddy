@@ -7,7 +7,8 @@ import SubmitReview from './SubmitReview';
 
 function mapStateToProps(state) {
   return {
-    reviews: state.reviews
+    reviews: state.reviews,
+    companies: state.companies
   }
 }
 

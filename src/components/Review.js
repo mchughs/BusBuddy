@@ -11,10 +11,10 @@ class Review extends React.Component {
 
   elapsedTime(t1 , t2) {
     // Convert to 24h
-    const a = t1.hours != 12 ?
+    const a = t1.hours !== 12 ?
       (t1.AM ? t1.hours : t1.hours+12) :
       t1.hours;
-    const b = t2.hours != 12 ?
+    const b = t2.hours !== 12 ?
       (t2.AM ? t2.hours : t2.hours+12) :
       t2.hours;
     // Convert to minutes
@@ -67,11 +67,11 @@ class Review extends React.Component {
             <div className="hasCurtains">Curtains?</div>
             <div className="hasUSB">USB charging?</div>
 
-            <div className="isAC_bool" value={review.features.isAC}>{review.features.isAC ? '✓': '✗'}</div>
-            <div className="isMusicVideos_bool" value={review.features.isMusicVideos}>{review.features.isMusicVideos ? '✓': '✗'}</div>
-            <div className="isMovies_bool" value={review.features.isMovies}>{review.features.isMovies ? '✓': '✗'}</div>
-            <div className="hasCurtains_bool" value={review.features.hasCurtains}>{review.features.hasCurtains ? '✓': '✗'}</div>
-            <div className="hasUSB_bool" value={review.features.hasUSB}>{review.features.hasUSB ? '✓': '✗'}</div>
+            <div className="isAC_bool" value={review.features.isAC || false}>{review.features.isAC ? '✓': '✗'}</div>
+            <div className="isMusicVideos_bool" value={review.features.isMusicVideos || false}>{review.features.isMusicVideos ? '✓': '✗'}</div>
+            <div className="isMovies_bool" value={review.features.isMovies || false}>{review.features.isMovies ? '✓': '✗'}</div>
+            <div className="hasCurtains_bool" value={review.features.hasCurtains || false}>{review.features.hasCurtains ? '✓': '✗'}</div>
+            <div className="hasUSB_bool" value={review.features.hasUSB || false}>{review.features.hasUSB ? '✓': '✗'}</div>
           </div>
           <div className="brokedown">{review.features.brokedown ? '😢This bus brokedown at some point.😢' : '😁This bus did not break down!😁' } </div>
           <p>{review.comment}</p>
