@@ -1,0 +1,6 @@
+[submodule "BusBuddy"]
+	path = BusBuddy
+	url = https://github.com/mchughs/BusBuddy
+[submodule "build"]
+	path = build
+	url = https://github.com/mchughs/BusBuddy
