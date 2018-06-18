@@ -1,10 +1,21 @@
 import React from 'react';
 import Review from './Review';
 import Timekeeper from 'react-timekeeper';
+import firebase from 'firebase';
 
 class SearchReviews extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+
+    this.props.fetchReviews();
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const uid = user.uid;
+        this.setState({uid});
+      } else {
+        /* If the user isn't logged in yet we should redirect them to Main.js*/
+      }
+    });
 
     this.handleChange = this.handleChange.bind(this);
     this.search = this.search.bind(this);
@@ -14,11 +25,8 @@ class SearchReviews extends React.Component {
       destination : '',
       before: {'hours': 11, 'minutes': 59, 'AM': false},
       after: {'hours': 0, 'minutes': 0, 'AM': true},
+      uid: '',
     }
-  }
-
-  componentWillMount() {
-    this.props.fetchReviews();
   }
 
   search() {
@@ -29,9 +37,22 @@ class SearchReviews extends React.Component {
         review.destination.toUpperCase().indexOf(this.state.destination.toUpperCase()) == 0)
       .filter(review =>
         this.checkTime(review))
-      .map((review, i) => <Review key={i} i={i} review={review} />)
+      .map((review, i) =>
+        <div className="review-delete">
+          <Review key={i} i={i} review={review} />
+          {this.checkUser(review) ?
+            /*Need to get corresponding key of the given review*/
+            <button className="deletebtn" onClick={() => this.props.removeReview(this.getKey(review))}>X</button> :
+            <br/>}
+        </div>)
     // Returns a message if no reviews match
     return filtered.length ? filtered : <div>No matches found.</div>
+  }
+
+  getKey(review) {
+    const keys = Object.keys(this.props.reviews);
+    const values = Object.values(this.props.reviews);
+    return(keys[values.indexOf(review)]);
   }
 
   checkTime(review) {
@@ -51,6 +72,10 @@ class SearchReviews extends React.Component {
     const m = before - ticket_time;
     const n = ticket_time - after;
     return (m >= 0 && n >= 0);
+  }
+
+  checkUser(review) {
+    return review.uid === this.state.uid;
   }
 
   handleChange(e) {

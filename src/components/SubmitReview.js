@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import firebase from 'firebase';
 
 /*Components*/
 import LocationPicker from './LocationPicker';
@@ -22,6 +23,15 @@ class SubmitReview extends React.Component {
     this.addCompany = this.addCompany.bind(this);
     this.addTime = this.addTime.bind(this);
 
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const uid = user.uid;
+        this.setState({uid});
+      } else {
+        /* If the user isn't logged in yet we should redirect them to Main.js*/
+      }
+    });
+
     this.state = {
       origin: '',
       destination: '',
@@ -39,8 +49,9 @@ class SubmitReview extends React.Component {
       ticket_time: {hours: 12, minutes: 0, AM: false},
       departure_time: {hours: 12, minutes: 0, AM: false},
       arrival_time: {hours: 12, minutes: 0, AM: false},
-      reviewId: 0,
+      reviewId: null,
       referrer: null,
+      uid: null,
     };
   }
 

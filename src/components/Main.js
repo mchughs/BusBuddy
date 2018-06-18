@@ -1,7 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Login from './Login';
+import firebase from 'firebase';
 
 class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.logUser = this.logUser.bind(this);
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({user})
+        this.logUser();
+      } else {
+
+      }
+    });
+
+    this.state = {
+      isLoggedIn: false,
+      user: ''
+    };
+  }
+
+  logUser() {
+    this.state.isLoggedIn ?
+      firebase.auth().signOut().then(this.setState({isLoggedIn : false})):
+      this.setState({isLoggedIn : true});
+  }
 
   render() {
     const WrappedLinkSearch = () => {
@@ -20,7 +46,7 @@ class Main extends React.Component {
       )
     }
 
-    return (
+    const loggedIn = (
       <div>
         <h1>
           Bus Buddy
@@ -41,7 +67,15 @@ class Main extends React.Component {
            Bus Buddy is helping volunteers share their transportation knowledge in a
            systematic manner.
         </p>
+        <div>Logged in as {this.state.user.email}</div>
+        <input type="submit" className="btnLog" onClick={this.logUser} value="Log out"
+          data-disable-with="Signing in…"/>
+      </div>
+    );
 
+    return (
+      <div>
+        {this.state.isLoggedIn ? loggedIn : <Login user={this.state.user} logUser={this.logUser}/>}
       </div>
     )
   }

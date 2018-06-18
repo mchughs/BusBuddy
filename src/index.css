@@ -23,6 +23,21 @@ button {
   cursor: pointer;
 }
 
+.review-delete{
+  display: grid;
+  grid-template-columns: 1fr max-content;
+}
+
+.deletebtn {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background-color: red;
+  color: white;
+  border: 2px solid red;
+  text-align: center;
+}
+
 .btnLog {
   background-color: #286DA8;
   color: white;
@@ -53,7 +68,7 @@ button {
 
 .container-log {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 10px 1fr;
   justify-items: center;
 }
 

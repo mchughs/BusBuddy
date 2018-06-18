@@ -27,5 +27,6 @@ export function removeReview(reviewId) {
   //   type: 'REMOVE_REVIEW',
   //   reviewId
   // }
+  console.log(reviewId);
   return dispatch => database.child(reviewId).remove();
 }

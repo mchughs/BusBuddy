@@ -14,6 +14,4 @@ const defaultState = {
 // const store = createStore(rootReducer, defaultState);
 const store = applyMiddleware(thunk)(createStore)(rootReducer);
 
-
-
 export default store;
