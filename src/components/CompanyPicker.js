@@ -14,6 +14,7 @@ class CompanyPicker extends React.Component {
   handleChange = (selectedOption) => {
     // If the user has deleted their selection, exit
     if (selectedOption === null ) {return;}
+    
     const inputCompany = {
       label: selectedOption.label.toUpperCase(),
       value: selectedOption.value.toUpperCase(),

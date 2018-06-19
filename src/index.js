@@ -11,11 +11,9 @@ import { SearchApp, SubmitApp} from './components/App';
 import Main from './components/Main';
 import Review from './components/Review';
 
-const repo = `/${window.location.pathname.split('/')[1]}`;
-
 const router = (
     <Provider store={store}>
-      <BrowserRouter basename={repo}>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route exact path="/" component={Main}></Route>
           <Route path="/search" component={SearchApp}></Route>
