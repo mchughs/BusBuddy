@@ -51,7 +51,7 @@ class SubmitReview extends React.Component {
       this.setState({uid : JSON.parse(localStorageRef).user.uid })
     } else {
       window.alert('Please log in first!');
-      window.location.href = "/";
+      window.location.href = "https://mchughs.github.io/BusBuddy/";
     }
   }
 
